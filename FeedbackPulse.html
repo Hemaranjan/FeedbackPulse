@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FeedbackPulse</title>
 <script src="https://cdn.jsdelivr.net/npm/mixpanel-browser@2.47.0/dist/mixpanel.umd.js"></script>
@@ -346,7 +347,7 @@
 // ─── CONFIG ───────────────────────────────────────────────────────
 let MIXPANEL_TOKEN = '27d60700d0e7ce4f22b4785b12ead0aa';
 let serviceAccount = { username: 'datapulse.060d64.mp-service-account', secret: 'xAfWi4Suq212jNGmrcOwKlOg4wRj0NEi', projectId: '4007789' };
-let useMock = true;
+let useMock = false;
 let currentUser = null;
 const eventLog = [];
 
@@ -529,6 +530,9 @@ function logout() {
 
 // ─── DASHBOARD RENDER ─────────────────────────────────────────────
 function renderDashboard() {
+  // Remove any stale mock/token banner
+  const stale = document.getElementById('token-banner');
+  if (stale) stale.remove();
   // Stats
   animateCount('s-users', 1284, '');
   animateCount('s-widgets', 3, '');
